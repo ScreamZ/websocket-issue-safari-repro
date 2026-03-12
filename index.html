@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Bun Safari WS Repro</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<div class="grain"></div>
+		<main class="app-shell">
+			<nav class="page-switcher" aria-label="Repro pages">
+				<a class="switch-link is-active" href="/">Raw WebSocket</a>
+				<a class="switch-link" href="/partysocket">PartySocket</a>
+			</nav>
+
+			<section class="hero">
+				<p class="eyebrow">Bun WebSocket Refresh Repro</p>
+				<h1>Raw browser socket. Raw Bun upgrade.</h1>
+				<p class="lede">
+					Open this page on mobile Safari using your machine IP, then refresh repeatedly. The server logs every
+					upgrade attempt. The client keeps retrying after failures and surfaces lifecycle events locally.
+				</p>
+			</section>
+
+			<section class="controls-panel">
+				<div class="controls">
+					<button id="connect-button" class="primary">Connect</button>
+					<button id="disconnect-button">Disconnect</button>
+					<button id="send-button">Send Ping</button>
+					<button id="clear-button">Clear Log</button>
+				</div>
+				<div class="toggles">
+					<label class="toggle">
+						<input id="auto-retry-toggle" type="checkbox" checked />
+						<span>Auto retry</span>
+					</label>
+					<label class="toggle">
+						<input id="cleanup-toggle" type="checkbox" checked />
+						<span>Lifecycle cleanup</span>
+					</label>
+				</div>
+			</section>
+
+			<section class="status-grid">
+				<article class="status-card emphasis">
+					<span class="label">State</span>
+					<strong id="state-value">Idle</strong>
+				</article>
+				<article class="status-card">
+					<span class="label">Attempt</span>
+					<strong id="attempt-value">0</strong>
+				</article>
+				<article class="status-card">
+					<span class="label">Retry In</span>
+					<strong id="retry-value">-</strong>
+				</article>
+				<article class="status-card">
+					<span class="label">Visibility</span>
+					<strong id="visibility-value">visible</strong>
+				</article>
+				<article class="status-card">
+					<span class="label">Socket ID</span>
+					<strong id="socket-id-value">-</strong>
+				</article>
+				<article class="status-card">
+					<span class="label">Last Lifecycle</span>
+					<strong id="lifecycle-value">-</strong>
+				</article>
+			</section>
+
+			<section class="meta-grid">
+				<article class="meta-card">
+					<span class="label">Origin</span>
+					<code id="origin-value"></code>
+				</article>
+				<article class="meta-card">
+					<span class="label">WebSocket URL</span>
+					<code id="ws-url-value"></code>
+				</article>
+				<article class="meta-card">
+					<span class="label">Last Error</span>
+					<code id="error-value">-</code>
+				</article>
+			</section>
+
+			<section class="log-panel">
+				<div class="log-header">
+					<h2>Client Log</h2>
+					<p>Newest first. Compare this with the Bun terminal output.</p>
+				</div>
+				<ol id="log-list" class="log-list"></ol>
+			</section>
+		</main>
+
+		<script type="module" src="./app.ts"></script>
+	</body>
+</html>

@@ -1,0 +1,15 @@
+{
+	"name": "ws-refresh-repro",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"partysocket": "^1.1.2"
+	},
+	"scripts": {
+		"dev:split-port": "REPRO_MODE=split-port bun --watch server.ts",
+		"dev:same-port": "REPRO_MODE=same-port bun --watch server.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.3.10"
+	}
+}
